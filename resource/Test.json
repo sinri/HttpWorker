@@ -1,0 +1,27 @@
+{
+  "headerArray" : [
+    {
+      "key" : "X-identity",
+      "value" : "DTHHC357D355FG"
+    }
+  ],
+  "dutyName" : "Test",
+  "password" : "password",
+  "parameterArray" : [
+    {
+      "key" : "username",
+      "value" : "admin"
+    },
+    {
+      "key" : "act",
+      "value" : "view"
+    },
+    {
+      "key" : "srcid",
+      "value" : "201409-1356-2579"
+    }
+  ],
+  "postBody" : "posting",
+  "URL" : "http:\/\/www.everstray.com\/include\/io_debug.php",
+  "username" : "username"
+}
