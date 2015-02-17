@@ -77,7 +77,7 @@ static NSStringEncoding custom_encoding=NSUTF8StringEncoding;
     self=[super init];
     if(self){
         _dutyName=@"";
-        _URL=@"http://www.everstray.com/include/io_debug.php";
+        _URL=@"";//@"http://www.everstray.com/include/io_debug.php";
         _username=@"";
         _password=@"";
         _headerArray=[[NSMutableArray alloc]init];
@@ -267,10 +267,21 @@ static NSStringEncoding custom_encoding=NSUTF8StringEncoding;
         NSURLResponse * response=nil;
         NSError * error=nil;
         
+        NSDate * startDate= [NSDate date];
+        
         NSData*data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        NSDate * endDate= [NSDate date];
+        NSTimeInterval t=[endDate timeIntervalSinceDate:startDate];
+        
         NSDictionary * r;
         if(response){
-            r= @{@"submit": @YES,@"data":data?data:[NSNull null],@"response":(response && (![response isEqual:[NSNull null]]))?response:[NSNull null],@"error":error?error:[NSNull null],@"method":@"GET"};
+            r= @{@"submit": @YES,
+                 @"data":data?data:[NSNull null],
+                 @"response":(response && (![response isEqual:[NSNull null]]))?response:[NSNull null],
+                 @"time_spend":[NSNumber numberWithDouble:t],
+                 @"error":error?error:[NSNull null],
+                 @"method":@"GET"};
         }else{
             r=  @{@"submit": @NO,@"data":@"Cannot connect to target!"};
         }
@@ -343,10 +354,21 @@ static NSStringEncoding custom_encoding=NSUTF8StringEncoding;
         NSURLResponse * response=nil;
         NSError * error=nil;
         
+        NSDate * startDate= [NSDate date];
+        
         NSData*data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        NSDate * endDate= [NSDate date];
+        NSTimeInterval t=[endDate timeIntervalSinceDate:startDate];
+        
         NSDictionary * r;
         if(response){
-            r = @{@"submit": @YES,@"data":data?data:[NSNull null],@"response":(response && (![response isEqual:[NSNull null]]))?response:[NSNull null],@"error":error?error:[NSNull null],@"method":@"POST"};
+            r = @{@"submit": @YES,
+                  @"data":data?data:[NSNull null],
+                  @"response":(response && (![response isEqual:[NSNull null]]))?response:[NSNull null],
+                  @"time_spend":[NSNumber numberWithDouble:t],
+                  @"error":error?error:[NSNull null],
+                  @"method":@"POST"};
         }else{
             r=  @{@"submit": @NO,@"data":@"Cannot connect to target!"};
         }

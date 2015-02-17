@@ -12,6 +12,7 @@
 #import "LSHttpDuty.h"
 #import "MobClick.h"
 
+static BOOL needAdMob=NO;
 
 @interface LSResponseTableViewController ()
 
@@ -42,7 +43,7 @@
 {
     [super viewDidLoad];
     
-    needAdMob=NO;
+//    needAdMob=NO;
     
     self.navigationItem.title=@"Response";
     
@@ -81,6 +82,7 @@
         if([data isEqual:[NSNull null]]){
             data=nil;
         }
+        timespend=[[response_dict objectForKey:@"time_spend"] doubleValue];
     }else{
         [[[UIAlertView alloc]initWithTitle:nil message:@"EXCEPTION" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil]show];
         [self.navigationController popViewControllerAnimated:YES];
@@ -206,9 +208,9 @@
             break;
         case 1:
             if(error_info && [error_info count]>0){
-                [label setText: @"ERROR"];
+                [label setText: [NSString stringWithFormat:@"ERROR with %lf s.",timespend]];
             }else{
-                [label setText:  @"NO ERROR"];
+                [label setText:  [NSString stringWithFormat:@"NO ERROR with %lf s.",timespend]];
             }
             break;
         case 2:
@@ -450,6 +452,7 @@
     
     //add details for body
     emailBody = [emailBody stringByAppendingString:@"<hr><h2>Response</h2>"];
+    emailBody = [emailBody stringByAppendingFormat:@"<p>Time cost (second): %lf</p>",timespend];
     if(response){
         emailBody = [emailBody stringByAppendingFormat:@"<h3>Code: %d</h3><p>%@</p>",status_code,desc_status_code];
         if([headers count]>0){
@@ -555,6 +558,7 @@
     
     // 启动一般性请求并在其中加载广告。
     [bannerView_ loadRequest:[GADRequest request]];
+    
 }
 -(UIView*)runAD{
     if(!needAdMob){

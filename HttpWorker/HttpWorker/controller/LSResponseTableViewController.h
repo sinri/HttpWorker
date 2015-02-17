@@ -20,7 +20,7 @@
     
     ADBannerView * adView;
     GADBannerView *bannerView_;
-    BOOL needAdMob;
+    
     
     BOOL isDone;
     //RESPONSE
@@ -29,6 +29,8 @@
     NSInteger status_code;
     NSString * desc_status_code;
     NSDictionary * headers;
+    //Time
+    NSTimeInterval timespend;
     //ERROR
     NSDictionary * error_info;
     //DATA

@@ -33,6 +33,9 @@
     [self.view addSubview:_wv];
     [_wv loadHTMLString:wv_html baseURL:wv_url];
     
+//    NSString*adurl=[MobClick getAdURL];
+//    NSLog(@"adURL->[%@]",adurl);
+    
 }
 - (void)viewWillAppear:(BOOL)animated
 {
